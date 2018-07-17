@@ -167,6 +167,7 @@ let
       haskell.compiler = packagePlatforms pkgs.haskell.compiler;
       haskellPackages = packagePlatforms pkgs.haskellPackages;
       idrisPackages = packagePlatforms pkgs.idrisPackages;
+      purescript = packagePlatforms pkgs.haskellPackages.purescript;
 
       # Language packages disabled in https://github.com/NixOS/nixpkgs/commit/ccd1029f58a3bb9eca32d81bf3f33cb4be25cc66
 
