@@ -2367,7 +2367,6 @@ default-package-overrides:
   - ztail ==1.2.0.2
 
 extra-packages:
-  - aeson < 0.8                         # newer versions don't work with GHC 7.6.x or earlier
   - aeson-pretty < 0.8                  # required by elm compiler
   - apply-refact < 0.4                  # newer versions don't work with GHC 8.0.x
   - aws ^>= 0.18                        # pre-lts-11.x versions neeed by git-annex 6.20180227
@@ -2418,7 +2417,6 @@ extra-packages:
   - resourcet ==1.1.*                   # pre-lts-11.x versions neeed by git-annex 6.20180227
   - seqid < 0.2                         # newer versions depend on transformers 0.4.x which we cannot provide in GHC 7.8.x
   - seqid-streams < 0.2                 # newer versions depend on transformers 0.4.x which we cannot provide in GHC 7.8.x
-  - tar < 0.4.2.0                       # later versions don't work with GHC < 7.6.x
   - transformers == 0.4.3.*             # the latest version isn't supported by mtl yet
   - xml-conduit ^>= 1.7                 # pre-lts-11.x versions neeed by git-annex 6.20180227
   - yesod ^>= 1.4                       # pre-lts-11.x versions neeed by git-annex 6.20180227
