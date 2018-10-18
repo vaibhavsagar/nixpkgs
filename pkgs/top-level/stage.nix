@@ -174,6 +174,10 @@ let
     # Prefer appendOverlays if used repeatedly.
     extend = f: self.appendOverlays [f];
 
+    pkgsStatic = nixpkgsFun {
+      # buildPackages = self;
+      crossOverlays = overlays ++ [(import ./static.nix)];
+    };
   };
 
   # The complete chain of package set builders, applied from top to bottom.

@@ -1,5 +1,5 @@
 { lib
-, localSystem, crossSystem, config, overlays
+, localSystem, crossSystem, config, overlays, crossOverlays ? []
 
 # Allow passing in bootstrap files directly so we can test the stdenv bootstrap process when changing the bootstrap tools
 , bootstrapFiles ? let
@@ -14,7 +14,7 @@
     cpio    = fetch { file = "cpio";  sha256 = "0r5c54hg678w7zydx27bzl9p3v9fs25y5ix6vdfi1ilqim7xh65n"; };
     tarball = fetch { file = "bootstrap-tools.cpio.bz2"; sha256 = "18hp5w6klr8g307ap4368r255qpzg9r0vwg9vqvj8f2zy1xilcjf"; executable = false; };
   }
-}:
+ }:
 
 assert crossSystem == null;
 

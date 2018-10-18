@@ -1,5 +1,5 @@
 { lib
-, localSystem, crossSystem, config, overlays
+, localSystem, crossSystem, config, overlays, crossOverlays
 }:
 
 let
@@ -26,19 +26,24 @@ in lib.init bootStages ++ [
       assert vanillaPackages.stdenv.buildPlatform == localSystem;
       assert vanillaPackages.stdenv.hostPlatform == localSystem;
       assert vanillaPackages.stdenv.targetPlatform == localSystem;
-      vanillaPackages.stdenv.override { targetPlatform = crossSystem; };
+      vanillaPackages.stdenv.override {
+        targetPlatform = if crossSystem == null
+                         then localSystem
+                         else crossSystem;
+      };
     # It's OK to change the built-time dependencies
     allowCustomOverrides = true;
   })
 
   # Run Packages
   (buildPackages: {
-    inherit config overlays;
+    inherit config;
+    overlays = overlays ++ crossOverlays;
     selfBuild = false;
     stdenv = buildPackages.stdenv.override (old: rec {
       buildPlatform = localSystem;
-      hostPlatform = crossSystem;
-      targetPlatform = crossSystem;
+      hostPlatform = if crossSystem == null then localSystem else crossSystem;
+      targetPlatform = if crossSystem == null then localSystem else crossSystem;
 
       # Prior overrides are surely not valid as packages built with this run on
       # a different platform, and so are disabled.
@@ -48,7 +53,7 @@ in lib.init bootStages ++ [
 
       cc = if crossSystem.useiOSPrebuilt or false
              then buildPackages.darwin.iosSdkPkgs.clang
-           else if crossSystem.useAndroidPrebuilt
+           else if crossSystem.useAndroidPrebuilt or false
              then buildPackages.androidenv."androidndkPkgs_${crossSystem.ndkVer}".gcc
            else buildPackages.gcc;
 

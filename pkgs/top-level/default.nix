@@ -32,6 +32,8 @@
 , # List of overlays layers used to extend Nixpkgs.
   overlays ? []
 
+, crossOverlays ? []
+
 , # A function booting the final package set for a specific standard
   # environment. See below for the arguments given to that function, the type of
   # list it returns.
@@ -91,7 +93,7 @@ in let
   boot = import ../stdenv/booter.nix { inherit lib allPackages; };
 
   stages = stdenvStages {
-    inherit lib localSystem crossSystem config overlays;
+    inherit lib localSystem crossSystem config overlays crossOverlays;
   };
 
   pkgs = boot stages;
