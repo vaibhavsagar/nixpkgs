@@ -61,6 +61,9 @@ in lib.init bootStages ++ [
         ++ lib.optionals
              (hostPlatform.isLinux && !buildPlatform.isLinux)
              [ buildPackages.patchelf buildPackages.paxctl ]
+        ++ lib.optionals
+             (hostPlatform.isDarwin && buildPlatform.isDarwin)
+             [ buildPackages.clang ]
         ++ lib.optional
              (let f = p: !p.isx86 || p.libc == "musl"; in f hostPlatform && !(f buildPlatform))
              buildPackages.updateAutotoolsGnuConfigScriptsHook
