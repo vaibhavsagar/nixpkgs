@@ -1,5 +1,7 @@
 self: super: {
-  stdenv = super.stdenvAdapters.makeStaticLibraries super.stdenv;
+  stdenv = (if super.stdenv.isDarwin then (x: x)
+            else super.stdenvAdapters.makeStaticBinaries)
+              (super.stdenvAdapters.makeStaticLibraries super.stdenv);
   # libiconv = super.libiconv.override {
   #   enableShared = false;
   #   enableStatic = true;
