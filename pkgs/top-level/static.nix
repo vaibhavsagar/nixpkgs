@@ -41,6 +41,13 @@ in {
     enableShared = false;
     enableStatic = true;
   };
+  zlib = super.zlib.override {
+    static = true;
+
+    # Don’t use new stdenv zlib because
+    # it doesn’t like the --disable-shared flag
+    stdenv = super.stdenv;
+  };
   xz = super.xz.override {
     enableStatic = true;
   };
