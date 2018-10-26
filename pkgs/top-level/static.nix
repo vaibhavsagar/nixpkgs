@@ -16,7 +16,7 @@ self: super: let
   inherit (super.stdenvAdapters) makeStaticBinaries
                                  overrideInStdenv
                                  makeStaticLibraries;
-  inherit (super.lib) foldl optional flip id;
+  inherit (super.lib) foldl optional flip id optionalAttrs;
 
   staticAdapters = [ makeStaticLibraries ]
 
@@ -30,10 +30,6 @@ self: super: let
 
 in {
   stdenv = foldl (flip id) super.stdenv staticAdapters;
-  # libiconv = super.libiconv.override {
-  #   enableShared = false;
-  #   enableStatic = true;
-  # };
   ncurses = super.ncurses.override {
     enableStatic = true;
   };
@@ -52,6 +48,11 @@ in {
     enableStatic = true;
   };
   busybox = super.busybox.override {
+    enableStatic = true;
+  };
+} // optionalAttrs super.stdenv.isDarwin {
+  libiconv = super.libiconv.override {
+    enableShared = false;
     enableStatic = true;
   };
 }
