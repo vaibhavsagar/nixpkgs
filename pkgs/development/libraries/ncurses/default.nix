@@ -29,7 +29,7 @@ stdenv.mkDerivation rec {
   setOutputFlags = false; # some aren't supported
 
   configureFlags = [
-    (if enableShared then "--with-shared" else "--without-shared")
+    (lib.withFeature enableShared "shared")
     "--without-debug"
     "--enable-pc-files"
     "--enable-symlinks"
