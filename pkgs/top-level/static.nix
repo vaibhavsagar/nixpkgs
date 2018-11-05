@@ -50,7 +50,55 @@ in {
   busybox = super.busybox.override {
     enableStatic = true;
   };
-} // optionalAttrs super.stdenv.isDarwin {
+  v8 = super.v8.override {
+    static = true;
+  };
+  libiberty = super.libiberty.override {
+    staticBuild = true;
+  };
+  ipmitool = super.ipmitool.override {
+    static = true;
+  };
+  proot = super.proot.override {
+    enableStatic = true;
+  };
+  neon = super.neon.override {
+    static = true;
+    shared = false;
+  };
+  libjpeg = super.libjpeg.override {
+    static = true;
+  };
+  gifsicle = super.gifsicle.override {
+    static = true;
+  };
+  bzip2 = super.bzip2.override {
+    linkStatic = true;
+  };
+  optipng = super.optipng.override {
+    static = true;
+  };
+  boost = super.boost.override {
+    enableStatic = true;
+    enableShared = false;
+  };
+  gmp = super.gmp.override {
+    withStatic = true;
+  };
+  cdo = super.cdo.override {
+    enable_all_static = true;
+  };
+  gsm = super.gsm.override {
+    staticSupport = true;
+  };
+  parted = super.parted.override {
+    enableStatic = true;
+  };
+  libiconvReal = super.libiconvReal.override {
+    enableShared = false;
+    enableStatic = true;
+  };
+} // optionalAttrs super.stdenv.hostPlatform.isDarwin {
   libiconv = super.libiconv.override {
     enableShared = false;
     enableStatic = true;
