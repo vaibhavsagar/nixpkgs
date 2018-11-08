@@ -98,6 +98,11 @@ in {
     enableShared = false;
     enableStatic = true;
   };
+  perl = super.perl.override {
+    # Don’t use new stdenv zlib because
+    # it doesn’t like the --disable-shared flag
+    stdenv = super.stdenv;
+  };
 } // optionalAttrs super.stdenv.hostPlatform.isDarwin {
   libiconv = super.libiconv.override {
     enableShared = false;
