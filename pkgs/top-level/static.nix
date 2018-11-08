@@ -59,9 +59,6 @@ in {
   ipmitool = super.ipmitool.override {
     static = true;
   };
-  proot = super.proot.override {
-    enableStatic = true;
-  };
   neon = super.neon.override {
     static = true;
     shared = false;
