@@ -75,6 +75,13 @@ in {
   optipng = super.optipng.override {
     static = true;
   };
+  openssl = super.openssl.override {
+    static = true;
+
+    # Don’t use new stdenv for openssl because it doesn’t like the
+    # --disable-shared flag
+    stdenv = super.stdenv;
+  };
   boost = super.boost.override {
     enableStatic = true;
     enableShared = false;
