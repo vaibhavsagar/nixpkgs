@@ -27,9 +27,7 @@ in lib.init bootStages ++ [
       assert vanillaPackages.stdenv.hostPlatform == localSystem;
       assert vanillaPackages.stdenv.targetPlatform == localSystem;
       vanillaPackages.stdenv.override {
-        targetPlatform = if crossSystem == null
-                         then localSystem
-                         else crossSystem;
+        targetPlatform = crossSystem;
       };
     # It's OK to change the built-time dependencies
     allowCustomOverrides = true;
@@ -42,8 +40,8 @@ in lib.init bootStages ++ [
     selfBuild = false;
     stdenv = buildPackages.stdenv.override (old: rec {
       buildPlatform = localSystem;
-      hostPlatform = if crossSystem == null then localSystem else crossSystem;
-      targetPlatform = if crossSystem == null then localSystem else crossSystem;
+      hostPlatform = crossSystem;
+      targetPlatform = crossSystem;
 
       # Prior overrides are surely not valid as packages built with this run on
       # a different platform, and so are disabled.

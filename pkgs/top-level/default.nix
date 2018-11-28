@@ -22,9 +22,8 @@
   # `*Platform`s.
   localSystem
 
-, # The system packages will ultimately be run on. Null if the two should be the
-  # same.
-  crossSystem ? null
+, # The system packages will ultimately be run on.
+  crossSystem ? localSystem
 
 , # Allow a configuration attribute set to be passed in as an argument.
   config ? {}

@@ -36,7 +36,7 @@ let
 
   # Select the appropriate stages for the platform `system'.
 in
-  if crossSystem != null || crossOverlays != [] then stagesCross
+  if crossSystem != localSystem || crossOverlays != [] then stagesCross
   else if config ? replaceStdenv then stagesCustom
   else { # switch
     "i686-linux" = stagesLinux;
