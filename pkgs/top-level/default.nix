@@ -62,7 +62,8 @@ in let
     builtins.intersectAttrs { platform = null; } config
     // args.localSystem);
 
-  crossSystem = lib.mapNullable lib.systems.elaborate crossSystem0;
+  crossSystem = if crossSystem0 == null then localSystem
+                else lib.systems.elaborate crossSystem0;
 
   # A few packages make a new package set to draw their dependencies from.
   # (Currently to get a cross tool chain, or forced-i686 package.) Rather than

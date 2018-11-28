@@ -5,7 +5,10 @@
 let
   bootStages = import ../. {
     inherit lib localSystem overlays;
-    crossSystem = null;
+
+    crossSystem = localSystem;
+    crossOverlays = [];
+
     # Ignore custom stdenvs when cross compiling for compatability
     config = builtins.removeAttrs config [ "replaceStdenv" ];
   };
