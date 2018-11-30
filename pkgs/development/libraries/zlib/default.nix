@@ -24,13 +24,13 @@ stdenv.mkDerivation (rec {
       --replace 'ARFLAGS="-o"' 'ARFLAGS="-r"'
   '';
 
-  outputs = [ "out" "dev" "static" ];
+  outputs = [ "out" "dev" ] ++ stdenv.lib.optional (!static) "static";
   setOutputFlags = false;
   outputDoc = "dev"; # single tiny man3 page
 
-  configureFlags = stdenv.lib.optional (!static) "--shared";
+  configureFlags = [ (if static then "--static" else "--shared") ];
 
-  postInstall = ''
+  postInstall = stdenv.lib.optionalString (!static) ''
     moveToOutput lib/libz.a "$static"
   ''
     # jww (2015-01-06): Sometimes this library install as a .so, even on
