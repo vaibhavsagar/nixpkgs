@@ -107,9 +107,10 @@ in {
     # it doesn’t like the --disable-shared flag
     stdenv = super.stdenv;
   };
-} // optionalAttrs super.stdenv.hostPlatform.isDarwin {
-  libiconv = super.libiconv.override {
-    enableShared = false;
-    enableStatic = true;
+  darwin = super.darwin // {
+    libiconv = super.libiconv.override {
+      enableShared = false;
+      enableStatic = true;
+    };
   };
 }
