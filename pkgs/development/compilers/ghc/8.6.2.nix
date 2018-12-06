@@ -213,6 +213,7 @@ stdenv.mkDerivation (rec {
 
     inherit llvmPackages;
     inherit enableShared;
+    inherit enableIntegerSimple;
 
     # Our Cabal compiler name
     haskellCompilerName = "ghc-8.6.2";
