@@ -107,6 +107,9 @@ in {
     # it doesn’t like the --disable-shared flag
     stdenv = super.stdenv;
   };
+  mariadb = super.mariadb.override {
+    stdenv = super.stdenv;
+  };
   darwin = super.darwin // {
     libiconv = super.libiconv.override {
       enableShared = false;
