@@ -1,0 +1,25 @@
+diff --git a/libmariadb/CMakeLists.txt b/libmariadb/CMakeLists.txt
+index 03b20c9..79550b3 100644
+--- a/libmariadb/CMakeLists.txt
++++ b/libmariadb/CMakeLists.txt
+@@ -385,7 +385,7 @@ ENDIF()
+ # CREATE OBJECT LIBRARY 
+ ADD_LIBRARY(mariadb_obj OBJECT ${LIBMARIADB_SOURCES})
+ IF(UNIX)
+-  SET_TARGET_PROPERTIES(mariadb_obj PROPERTIES COMPILE_FLAGS "${CMAKE_SHARED_LIBRARY_C_FLAGS}")
++  SET_TARGET_PROPERTIES(mariadb_obj PROPERTIES COMPILE_FLAGS "${CMAKE_STATIC_LIBRARY_C_FLAGS}")
+ ENDIF()
+ 
+ # Xcode doesn't support targets that have only object files,
+@@ -398,10 +398,10 @@ ENDIF()
+ ADD_LIBRARY(mariadbclient STATIC ${mariadbclient_RC} $<TARGET_OBJECTS:mariadb_obj> ${EMPTY_FILE} ${EXPORT_LINK})
+ TARGET_LINK_LIBRARIES(mariadbclient ${SYSTEM_LIBS})
+ 
+-ADD_LIBRARY(libmariadb SHARED ${libmariadb_RC} $<TARGET_OBJECTS:mariadb_obj> ${EMPTY_FILE} ${EXPORT_LINK})
++ADD_LIBRARY(libmariadb STATIC ${libmariadb_RC} $<TARGET_OBJECTS:mariadb_obj> ${EMPTY_FILE} ${EXPORT_LINK})
+ TARGET_LINK_LIBRARIES(libmariadb ${SYSTEM_LIBS})
+ IF(UNIX)
+-  SET_TARGET_PROPERTIES(libmariadb PROPERTIES COMPILE_FLAGS "${CMAKE_SHARED_LIBRARY_C_FLAGS}")
++  SET_TARGET_PROPERTIES(libmariadb PROPERTIES COMPILE_FLAGS "${CMAKE_STATIC_LIBRARY_C_FLAGS}")
+ ENDIF()
+ SIGN_TARGET(libmariadb)
