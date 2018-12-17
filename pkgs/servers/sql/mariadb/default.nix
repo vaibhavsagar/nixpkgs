@@ -2,7 +2,7 @@
 , libiconv, openssl, pcre, boost, judy, bison, libxml2
 , libaio, libevent, jemalloc, cracklib, systemd, numactl, perl
 , fixDarwinDylibNames, cctools, CoreServices
-, asio, buildEnv, check, scons
+, asio, buildEnv, check, scons, forceStatic ? false
 }:
 
 with stdenv.lib;
@@ -182,7 +182,7 @@ connector-c = stdenv.mkDerivation rec {
   name = "mariadb-connector-c-${version}";
   version = "2.3.7";
 
-  patches = [ ./static-connector-c.patch ];
+  patches = stdenv.lib.optional forceStatic ./static-connector-c.patch;
 
   src = fetchurl {
     url = "https://downloads.mariadb.org/interstitial/connector-c-${version}/mariadb-connector-c-${version}-src.tar.gz/from/http%3A//nyc2.mirrors.digitalocean.com/mariadb/";

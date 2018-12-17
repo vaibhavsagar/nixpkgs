@@ -109,6 +109,7 @@ in {
   };
   mariadb = super.mariadb.override {
     stdenv = super.stdenv;
+    forceStatic = true;
   };
   darwin = super.darwin // {
     libiconv = super.libiconv.override {
