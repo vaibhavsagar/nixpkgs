@@ -111,7 +111,7 @@ in {
     stdenv = super.stdenv;
     forceStatic = true;
   };
-  zeromq = super.zeromq.override {
+  zeromq4 = super.zeromq4.override {
     enableStatic = true;
   };
   darwin = super.darwin // {
