@@ -1,3 +1,9 @@
+commit fa93fe72b18995ee620389bf088ac4c802427bdc
+Author: John Ericson <John.Ericson@Obsidian.Systems>
+Date:   Fri Dec 14 18:16:53 2018 -0500
+
+    Hack some bad cmake to make static instad of shared
+
 diff --git a/libmariadb/CMakeLists.txt b/libmariadb/CMakeLists.txt
 index 03b20c9..79550b3 100644
 --- a/libmariadb/CMakeLists.txt
@@ -23,3 +29,17 @@ index 03b20c9..79550b3 100644
 +  SET_TARGET_PROPERTIES(libmariadb PROPERTIES COMPILE_FLAGS "${CMAKE_STATIC_LIBRARY_C_FLAGS}")
  ENDIF()
  SIGN_TARGET(libmariadb)
+ 
+diff --git a/mariadb_config/CMakeLists.txt b/mariadb_config/CMakeLists.txt
+index 4a1b6dc..9e64b0f 100644
+--- a/mariadb_config/CMakeLists.txt
++++ b/mariadb_config/CMakeLists.txt
+@@ -11,7 +11,7 @@ ENDFOREACH(dep)
+ 
+ IF(UNIX)
+   IF(OPENSSL_LIBRARIES)
+-    SET(extra_dynamic_LDFLAGS "${extra_dynamic_LDFLAGS} -lssl")
++    SET(extra_dynamic_LDFLAGS "${extra_dynamic_LDFLAGS} -lssl -lcrypto")
+   ENDIF()
+   IF(ICONV_EXTERNAL)
+     SET(extra_dynamic_LDFLAGS "${extra_dynamic_LDFLAGS} ${ICONV_LIBRARIES}")
