@@ -39,7 +39,7 @@ index 4a1b6dc..9e64b0f 100644
  IF(UNIX)
    IF(OPENSSL_LIBRARIES)
 -    SET(extra_dynamic_LDFLAGS "${extra_dynamic_LDFLAGS} -lssl")
-+    SET(extra_dynamic_LDFLAGS "${extra_dynamic_LDFLAGS} -lssl -lcrypto")
++    SET(extra_dynamic_LDFLAGS "${extra_dynamic_LDFLAGS} -lssl -lcrypto -lz")
    ENDIF()
    IF(ICONV_EXTERNAL)
      SET(extra_dynamic_LDFLAGS "${extra_dynamic_LDFLAGS} ${ICONV_LIBRARIES}")
