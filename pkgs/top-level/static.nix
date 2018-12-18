@@ -111,6 +111,9 @@ in {
     stdenv = super.stdenv;
     forceStatic = true;
   };
+  zeromq = super.zeromq.override {
+    enableStatic = true;
+  };
   darwin = super.darwin // {
     libiconv = super.libiconv.override {
       enableShared = false;

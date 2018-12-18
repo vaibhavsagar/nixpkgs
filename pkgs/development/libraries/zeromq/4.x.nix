@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, cmake, asciidoc }:
+{ stdenv, fetchFromGitHub, cmake, asciidoc, enableStatic ? false }:
 
 stdenv.mkDerivation rec {
   name = "zeromq-${version}";
@@ -10,6 +10,8 @@ stdenv.mkDerivation rec {
     rev = "v${version}";
     sha256 = "18mjmbhvfhr4463dqayl5hdjfy5rx7na1xsq9dsvlaz9qlr5fskw";
   };
+
+  cmakeFlags = if enableStatic then [ "-DBUILD_SHARED=NO" ] else null;
 
   nativeBuildInputs = [ cmake asciidoc ];
 
